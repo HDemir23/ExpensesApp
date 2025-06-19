@@ -1,0 +1,17 @@
+export const mockExpenses = [
+  { id: "1", amount: 50, description: "Groceries", icon: "🛒" },
+  { id: "2", amount: 20, description: "Transport", icon: "🚌" },
+  { id: "3", amount: 100, description: "Utilities", icon: "💡" },
+  { id: "4", amount: 30, description: "Dining Out", icon: "🍽️" },
+  { id: "5", amount: 75, description: "Entertainment", icon: "🎬" },
+  { id: "6", amount: 40, description: "Shopping", icon: "🛍️" },
+  { id: "7", amount: 60, description: "Health & Fitness", icon: "🏋️" },
+  { id: "8", amount: 90, description: "Travel", icon: "✈️" },
+  { id: "9", amount: 25, description: "Subscriptions", icon: "📺" },
+  { id: "10", amount: 15, description: "Miscellaneous", icon: "📦" },
+  { id: "11", amount: 45, description: "Books", icon: "📚" },
+  { id: "12", amount: 80, description: "Clothing", icon: "👗" },
+  { id: "13", amount: 55, description: "Gifts", icon: "🎁" },
+  { id: "14", amount: 35, description: "Home Supplies", icon: "🏠" },
+  { id: "15", amount: 105, description: "Pet Care", icon: "🐾" },
+];
