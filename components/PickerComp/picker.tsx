@@ -1,12 +1,11 @@
 
 import React, { useState } from "react";
 import {
-  View,
-  Text,
-  Modal,
-  TouchableOpacity,
   FlatList,
-  StyleSheet,
+  Modal,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
 
 import { usePickerStyle } from "./picker.style";

@@ -14,7 +14,7 @@ export default function Index() {
   return (
     <View style={styles.container}>
 
-        <Text style={{color: theme.foreground}} onPress={onPress}>Click Me</Text>
+        <Text style={{color: theme.foreground}} onPress={onPress}>Click </Text>
 
     </View>
   );

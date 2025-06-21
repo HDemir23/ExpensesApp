@@ -4,7 +4,7 @@ import { TextStyle, ViewStyle } from "react-native";
 
 export const useExpensesCardStyles = () => {
   const theme = useThemeColors();
-  console.log("ExpensesCard rendered, theme mode:", theme.mode);
+
 
   const container: ViewStyle = useMemo(
     () => ({
@@ -62,7 +62,20 @@ export const useExpensesCardStyles = () => {
       height: "90%",
       marginLeft: 5,
     }),
-    []
+    [theme]
+  );
+
+  const edit: ViewStyle = useMemo(
+    () => ({
+      backgroundColor: "#50C878",
+      justifyContent: "center",
+      borderRadius: 30,
+      alignItems: "flex-end",
+      paddingHorizontal: 10,
+      height: "90%",
+      marginLeft: 5,
+    }),
+    [theme]
   );
 
   return {
@@ -71,5 +84,6 @@ export const useExpensesCardStyles = () => {
     description,
     amount,
     rect,
+    edit
   };
 };

@@ -1,6 +1,6 @@
-import { StyleSheet } from "react-native";
-import { useMemo } from "react";
 import { useThemeColors } from "@/constants/themeProvider";
+import { useMemo } from "react";
+import { StyleSheet } from "react-native";
 
 export function useAddExpensesStyles() {
   const colors = useThemeColors();
@@ -29,6 +29,7 @@ export function useAddExpensesStyles() {
           shadowOpacity: 0.1,
           shadowRadius: 4,
           elevation: 2,
+          marginTop: 10,
         },
       }).card,
     [colors]
@@ -88,6 +89,16 @@ export function useAddExpensesStyles() {
     [colors]
   );
 
+  const picker = useMemo(
+    () =>
+      StyleSheet.create({
+        button: {
+          color: colors.foreground
+        },
+      }).button,
+    [colors]
+  );
+
   return {
     container,
     card,
@@ -95,5 +106,6 @@ export function useAddExpensesStyles() {
     input,
     button,
     buttonText,
+    picker
   };
 }
