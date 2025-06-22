@@ -1,37 +1,65 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useSaveOrUpdateExpense } from "@/hooks/useSaveExpenses";
+import { ExpenseType } from "@/types/expenses";
 import { Picker } from "@react-native-picker/picker";
+import { useLocalSearchParams } from "expo-router";
 import React, { useCallback, useState } from "react";
-import { Alert, Pressable, Text, TextInput, View } from "react-native";
+import { Pressable, Text, TextInput, View } from "react-native";
 import { useAddExpensesStyles } from "./AddExpenses.style";
-import { useSaveExpense } from "@/hooks/useSaveExpenses";
 
+type AddExpensesProps = {
+  mode: "add" | "edit";
+  existingExpens: ExpenseType;
+  onSubmit: (expense: ExpenseType) => void;
+};
 
+export default function AddExpenses(props: AddExpensesProps) {
+  const {
+    mode,
+    id,
+    description: incomingDescription,
+    amount: incomingAmount,
+    date: incomingDate,
+  } = useLocalSearchParams();
 
+  const params = useLocalSearchParams()
+  const isEdit = params.mode === "edit";
 
-export default function AddExpenses() {
+  const [description, setDescription] = useState(
+    isEdit && typeof params.description === "string" ? params.description : ""
+  );
+  const [expense, setExpense] = useState(
+    isEdit && typeof params.amount === "string" ? Number(params.amount) : 0
+  );
+  const [selectedDay, setSelectedDay] = useState(
+    isEdit && typeof params.date === "string" ? Number(params.date) : 30
+  );
 
-  // Magic Numbers must be constant declerade
-  const EXPENSES_Key = "expenses"
+  const existingId =
+    isEdit && typeof params.id === "string" ? params.id : undefined;
 
-  const [expense, setExpense] = useState<number>(0);
-  const [description, setDescription] = useState("");
   const styles = useAddExpensesStyles();
-  const [selectedDay, setSelectedDay] = useState(30);
-  const [checked, setChecked]= useState(false)
+
+  const [checked, setChecked] = useState(false);
 
   const onChangeNumber = useCallback((text: string) => {
     const number = parseFloat(text);
     setExpense(isNaN(number) ? 0 : number);
   }, []);
 
-
   const resetForm = () => {
     setDescription("");
-    setExpense(0)
-    setSelectedDay(30)
-  }
+    setExpense(0);
+    setSelectedDay(30);
+  };
 
-  const Save = useSaveExpense(description, expense, selectedDay, resetForm)
+  const Save = useSaveOrUpdateExpense({
+    isEdit,
+    existingId: isEdit ? String(id) : undefined,
+    description,
+    amount: expense,
+    selectedDay,
+    resetForm,
+  });
 
   return (
     <View style={styles.container}>
@@ -76,7 +104,7 @@ export default function AddExpenses() {
       </Pressable>
       <View style={styles.card}>
         <Pressable style={styles.button} onPress={Save}>
-          <Text style={styles.buttonText}>Save</Text>
+          <Text style={styles.buttonText}>{isEdit ? "Update" : "Save"}</Text>
         </Pressable>
       </View>
     </View>
