@@ -5,3 +5,9 @@ export type ExpenseType = {
   icon?: string;
   date: number;
 };
+
+
+export type RatesType = {
+  base: string,
+  rates: Record<string, number>;
+};

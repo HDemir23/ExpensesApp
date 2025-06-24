@@ -7,9 +7,9 @@ import { Pressable, Text, TextInput, View } from "react-native";
 import { useAddExpensesStyles } from "./AddExpenses.style";
 
 type AddExpensesProps = {
-  mode: "add" | "edit";
-  existingExpens: ExpenseType;
-  onSubmit: (expense: ExpenseType) => void;
+  mode?: "add" | "edit";
+  existingExpens?: ExpenseType;
+  onSubmit?: (expense: ExpenseType) => void;
 };
 
 export default function AddExpenses(props: AddExpensesProps) {

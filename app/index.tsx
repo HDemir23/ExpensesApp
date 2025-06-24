@@ -5,6 +5,8 @@ import { router } from "expo-router";
 import { useCallback, useMemo } from "react";
 import { useThemeColors } from "@/constants/themeProvider";
 
+import ApiReq from "@/components/notifi";
+
 export default function Index() {
   const theme = useThemeColors();
   const onPress = useCallback(() => {
@@ -15,7 +17,7 @@ export default function Index() {
     <View style={styles.container}>
 
         <Text style={{color: theme.foreground}} onPress={onPress}>Click </Text>
-
+      <ApiReq currency="USD" />
     </View>
   );
 }
