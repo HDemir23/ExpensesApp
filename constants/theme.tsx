@@ -1,9 +1,6 @@
-import { useColorScheme } from "react-native";
-
-
 export const LightTheme = {
   mode: "light",
-  background: "#FDF6EC", 
+  background: "#FDF6EC",
   card: "#FFFFFF",
   foreground: "#3A3A2C",
   secondaryText: "#857C63",
@@ -12,7 +9,7 @@ export const LightTheme = {
   inputBackground: "#FBF8F1",
   primary: "#B8860B",
   primaryTextOnPrimary: "#FFFFFF",
-  accent: "#D8CBB5", 
+  accent: "#D8CBB5",
 
   button: {
     background: "#B8860B",
@@ -44,9 +41,9 @@ export const DarkTheme = {
   placeholderText: "#8C8C8C",
   border: "#2B2B2B",
   inputBackground: "#262626",
-  primary: "#D4AF37", // altın sarısı
+  primary: "#D4AF37",
   primaryTextOnPrimary: "#000000",
-  accent: "#FFD700", // gold highlight
+  accent: "#FFD700",
 
   button: {
     background: "#D4AF37",
@@ -68,9 +65,3 @@ export const DarkTheme = {
     error: "#DC143C",
   },
 };
-
-
-export function useTheme() {
-  const scheme = useColorScheme();
-  return scheme === "dark" ? DarkTheme : LightTheme;
-}
