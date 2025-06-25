@@ -4,6 +4,7 @@ export type ExpenseType = {
   amount: number;
   icon?: string;
   date: number;
+  currency: string;
 };
 
 

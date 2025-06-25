@@ -1,9 +1,10 @@
 import { useThemeColors } from "@/constants/themeProvider";
 import { useMemo } from "react";
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 
 export function useAddExpensesStyles() {
   const colors = useThemeColors();
+  const IsIos = Platform.OS === "ios";
 
   const container = useMemo(
     () =>
@@ -93,10 +94,11 @@ export function useAddExpensesStyles() {
     () =>
       StyleSheet.create({
         button: {
-          color: colors.foreground
+          color: colors.foreground,
+          height: IsIos ? 120 : undefined,
         },
       }).button,
-    [colors]
+    [colors, IsIos]
   );
 
   return {
@@ -106,6 +108,6 @@ export function useAddExpensesStyles() {
     input,
     button,
     buttonText,
-    picker
+    picker,
   };
 }

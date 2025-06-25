@@ -42,13 +42,6 @@ export default function ApiReq({currency}: props) {
         await AsyncStorage.setItem("rates", JSON.stringify(newRates))
     } 
 
-    const getRates = async (): Promise<RatesType> => {
-        const data = await AsyncStorage.getItem("rates")
-
-        return data ? JSON.parse(data) : {base: "TRY" , rates: {}};
-    }
-
-
 
 }
 

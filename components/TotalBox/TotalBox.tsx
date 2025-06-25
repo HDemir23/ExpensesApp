@@ -1,3 +1,4 @@
+import { ExpenseType, RatesType } from "@/types/expenses";
 import { expenseEmitter } from "@/utils/events";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Localization from "expo-localization";
@@ -5,20 +6,14 @@ import { useFocusEffect } from "expo-router";
 import { useCallback, useEffect, useState } from "react";
 import { Pressable, Text, View } from "react-native";
 import { useToolboxStyle } from "./TotalBox.style";
-import { ExpenseType ,RatesType } from "@/types/expenses";
 
-
+import { convertCurr } from "@/utils/currenncyUtils";
 
 export default function TotalBox() {
   const styles = useToolboxStyle();
   const [amount, setAmount] = useState(0);
-  const [showUSD, setShowUSD] = useState(false)
-
-  useFocusEffect(
-    useCallback(() => {
-      fetchTotal();
-    }, [])
-  );
+  const [showUSD, setShowUSD] = useState(false);
+  const locale = Localization.locale;
 
   useEffect(() => {
     const handler = () => {
@@ -32,45 +27,53 @@ export default function TotalBox() {
     };
   }, []);
 
-  const fetchTotal = async () => {
+  
+  const fetchTotal = useCallback(async () => {
     const data = await AsyncStorage.getItem("expenses");
-    const ratesData = await AsyncStorage.getItem("rates")
+    const ratesData = await AsyncStorage.getItem("rates");
 
     const parsed: ExpenseType[] = data ? JSON.parse(data) : [];
-    const total = parsed.reduce((sum, e) => sum + (e.amount ?? 0), 0);
 
-
-
-    if(ratesData) {
+    if (ratesData) {
       try {
-          const parsedRates: RatesType = JSON.parse(ratesData) 
-          let currentCurrency = parsedRates.rates[Localization.currency || "TRY"] || 1
-          const usdRates = parsedRates.rates["USD"] || 1
+        const parsedRates: RatesType = JSON.parse(ratesData);
 
-          const BaseToTry = total / currentCurrency
-          const converted = showUSD
-          ? BaseToTry * usdRates
-          : total; 
-          
-          setAmount(converted)
-          return
-        } catch (err) {
-          console.error("Failed to parse rates:", err);
-        }
+        const total = parsed.reduce((sum, e) => {
+          if (!e.amount || !e.currency) return sum;
 
+          const converted = convertCurr(
+            e.amount,
+            e.currency,
+            showUSD ? "USD" : "TRY",
+            parsedRates
+          );
 
+          return sum + converted;
+        }, 0);
+
+        setAmount(total);
+        return;
+      } catch (err) {
+        console.error("Failed to parse rates:", err);
+      }
     }
 
-    setAmount(total);
-  };
 
-  const region = Localization.region;
-  const currency = Localization.currency ?? "USD";
-  const locale = Localization.locale;
+    const fallbackTotal = parsed.reduce((sum, e) => sum + (e.amount ?? 0), 0);
+    setAmount(fallbackTotal);
+  }, [showUSD]);
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchTotal();
+    }, [fetchTotal]) 
+  );
+
+
 
   const formattedAmount = new Intl.NumberFormat(locale, {
     style: "currency",
-    currency: currency,
+    currency: showUSD ? "USD" : Localization.currency ?? "TRY",
     currencyDisplay: "narrowSymbol",
   }).format(amount);
 
@@ -80,7 +83,6 @@ export default function TotalBox() {
         style={styles.OutBgContainer}
         onPress={() => {
           setShowUSD((prev) => !prev);
-          fetchTotal(); 
         }}
       >
         <Text style={styles.TextHeaderStyle}>Total Spent</Text>

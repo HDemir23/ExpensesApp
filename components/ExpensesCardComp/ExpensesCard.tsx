@@ -1,20 +1,57 @@
-import { formatAmount } from "@/hooks/lib/formatAmount";
 import { useExpenses } from "@/hooks/useExpenses";
 import { ExpenseType } from "@/types/expenses";
+import { formatAmount } from "@/utils/formatAmount";
 import { router } from "expo-router";
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { FlatList, Text, View } from "react-native";
 import { RectButton, Swipeable } from "react-native-gesture-handler";
 import AddExpensesButton from "../AddExpensesButton";
 import { useExpensesCardStyles } from "./styles/expensesCard.styles";
+import { getRates } from "@/hooks/lib/getExpenses";
 
+type DisplayExpense = ExpenseType & {
+  formattedAmount: string;
+};
 
 export default function ExpensesCard() {
   const styles = useExpensesCardStyles();
-
+  
   const { expenses, handleDelete, keyExtractor } = useExpenses();
+  const [displayExpense, setDisplayExpense] = useState<DisplayExpense[]>([]);
 
-  const formattedAmount = formatAmount;
+  const getCurrencyEmote = (code: string): string => {
+    switch (code.toUpperCase()) {
+      case "TRY":
+        return "🇹🇷";
+      case "USD":
+        return "🇺🇸";
+      case "EUR":
+        return "🇪🇺";
+      default:
+        return "💰";
+    }
+  };
+  useEffect(() => {
+    const procces = async () => {
+      const rates = await getRates();
+      const update = await Promise.all(
+        expenses.map(async (expense) => {
+          const formatted = await formatAmount(
+            expense.amount,
+            expense.currency,
+            expense.currency,
+            rates.rates
+          );
+          return {
+            ...expense,
+            formattedAmount: formatted,
+          };
+        })
+      );
+      setDisplayExpense(update);
+    };
+    procces();
+  }, [expenses]);
 
   const handleEdit = (expense: ExpenseType) => {
     router.push({
@@ -23,7 +60,8 @@ export default function ExpensesCard() {
         mode: "edit",
         id: expense.id,
         description: expense.description,
-        amount: expense.amount.toString(), 
+        amount: expense.amount.toString(),
+        currency: expense.currency,
         date: expense.date.toString(),
       },
     });
@@ -44,23 +82,23 @@ export default function ExpensesCard() {
   );
 
   const renderExpenses = useCallback(
-    ({ item }: { item: ExpenseType }) => (
+    ({ item }: { item: DisplayExpense }) => (
       <Swipeable renderRightActions={() => renderAction(item)}>
         <View style={styles.itemCard}>
           <Text style={styles.description}>
-            {item.icon ?? "💰"} {item.description} Date:{item.date}
+            {getCurrencyEmote(item.currency)} {item.description}
           </Text>
-          <Text style={styles.amount}>{formattedAmount(item.amount)}</Text>
+          <Text style={styles.amount}>{[item.formattedAmount]}</Text>
         </View>
       </Swipeable>
     ),
-    [formattedAmount, handleDelete, styles]
+    [handleDelete, styles]
   );
 
   return (
     <View style={styles.container}>
       <FlatList
-        data={expenses}
+        data={displayExpense}
         keyExtractor={keyExtractor}
         renderItem={renderExpenses}
       />

@@ -1,9 +1,9 @@
 import { ExpenseType } from "@/types/expenses";
 import { expenseEmitter } from "@/utils/events";
 import { useCallback, useEffect, useState } from "react";
-import { getExpenses } from "./lib/getExpenses";
+import { formatAmount } from "../utils/formatAmount";
 import { deleteExpense } from "./lib/deleteExpenses";
-import { formatAmount } from "./lib/formatAmount";
+import { getExpenses } from "./lib/getExpenses";
 
 export const useExpenses = () => {
   const [expenses, setExpenses] = useState<ExpenseType[]>([]);
@@ -15,12 +15,12 @@ export const useExpenses = () => {
 
   useEffect(() => {
     fetchExpenses();
-    const lostener = () => fetchExpenses()
-    expenseEmitter.on("refreshTotal", lostener)
+    const lostener = () => fetchExpenses();
+    expenseEmitter.on("refreshTotal", lostener);
 
     return () => {
-        expenseEmitter.off("refreshTotal", lostener);
-    }
+      expenseEmitter.off("refreshTotal", lostener);
+    };
   }, [fetchExpenses]);
 
   const handleDelete = useCallback(async (id: string) => {

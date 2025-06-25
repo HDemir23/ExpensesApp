@@ -1,9 +1,9 @@
 import { ExpenseType } from "@/types/expenses";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Alert } from "react-native";
-import { useCallback } from "react";
 import { expenseEmitter } from "@/utils/events";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
+import { useCallback } from "react";
+import { Alert } from "react-native";
 
 const STORAGE_KEY = "expenses";
 const REFRESH_EVENT = "refreshTotal";
@@ -14,6 +14,7 @@ type Params = {
   description: string;
   amount: number;
   selectedDay: number;
+  currency: string;
   resetForm: () => void;
 };
 
@@ -23,6 +24,7 @@ export const useSaveOrUpdateExpense = ({
   description,
   amount,
   selectedDay,
+  currency,
   resetForm,
 }: Params) => {
   return useCallback(async () => {
@@ -44,7 +46,7 @@ export const useSaveOrUpdateExpense = ({
         // Güncelleme
         updatedList = parsed.map((item) =>
           item.id === existingId
-            ? { ...item, description, amount, date: selectedDay }
+            ? { ...item, description, amount, currency, date: selectedDay }
             : item
         );
       } else {
@@ -53,6 +55,7 @@ export const useSaveOrUpdateExpense = ({
           id: Date.now().toString(),
           description,
           amount,
+          currency,
           date: selectedDay,
         };
         updatedList = [...parsed, newItem];
@@ -73,5 +76,13 @@ export const useSaveOrUpdateExpense = ({
       console.error("Save/Update error:", e);
       Alert.alert("Error", "Failed to save or update the expense.");
     }
-  }, [isEdit, existingId, description, amount, selectedDay, resetForm]);
+  }, [
+    isEdit,
+    existingId,
+    description,
+    amount,
+    currency,
+    selectedDay,
+    resetForm,
+  ]);
 };
