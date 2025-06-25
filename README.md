@@ -1,53 +1,112 @@
-# Welcome to your Expo app 👋
+# 💰 ExpensesApp
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+**ExpensesApp** is a cross-platform React Native application built with Expo. It helps users track daily expenses with features like currency conversion, theme switching, and local storage.
 
-## Get started
+## ✨ Features
 
-1. Install dependencies
+- 📌 Add, edit, and delete expense records
+- 🌐 Currency support with live exchange rates (USD, EUR, TRY)
+- 🎨 Light/Dark theme toggle
+- 💾 Local data persistence with AsyncStorage
+- 📆 Date selection via picker
+- 🔔 (Optional) Notification toggle
+- 📱 Fully responsive UI for iOS, Android, and Web
 
-   ```bash
-   npm install
-   ```
+## 🛠️ Built With
 
-2. Start the app
+- [React Native](https://reactnative.dev/)
+- [Expo](https://expo.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [AsyncStorage](https://github.com/react-native-async-storage/async-storage)
+- [Expo Router](https://expo.github.io/router/)
+- [Expo Localization](https://docs.expo.dev/versions/latest/sdk/localization/)
+- [React Native Gesture Handler](https://docs.swmansion.com/react-native-gesture-handler/)
+- [React Native Picker](https://github.com/react-native-picker/picker)
 
-   ```bash
-   npx expo start
-   ```
+## 📷 Screenshots
 
-In the output, you'll find options to open the app in a
+- After EAS build :D
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## 🚀 Getting Started
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+### Prerequisites
 
-## Get a fresh project
+- Node.js >= 18
+- Expo CLI installed globally:
+  ```bash
+  npm install -g expo-cli
+  ```
 
-When you're ready, run:
+### Installation
 
 ```bash
-npm run reset-project
+git clone https://github.com/HDemir23/ExpensesApp.git
+cd ExpensesApp
+npm install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### Running the App
 
-## Learn more
+```bash
+npm start
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+To run on device/emulator:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+- Press `i` for iOS Simulator
+- Press `a` for Android Emulator
+- Scan QR code using Expo Go on your device
 
-## Join the community
+---
 
-Join our community of developers creating universal apps.
+## 📦 Build
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+To generate APK or iOS builds with EAS:
 
-// ToDo: Make notification
-add tradingwiew currency calculator
+```bash
+npx eas build -p android
+npx eas build -p ios
+```
+
+> Make sure you have `eas-cli` installed and your project is configured:
+
+```bash
+npm install -g eas-cli
+npx eas build:configure
+```
+
+---
+
+## 📁 Folder Structure
+
+```txt
+.
+├── components/          # UI components (AddExpenseButton, ExpenseCard, etc.)
+├── constants/           # Theme and configuration files
+├── hooks/               # Custom hooks (useExpenses, useSaveExpenses)
+├── utils/               # Utility functions (currency conversion, formatting)
+├── assets/              # Icons and splash images
+├── app/                 # App routes and entry points
+├── types/               # Type definitions (ExpenseType, RatesType)
+```
+
+---
+
+## 🧪 To Do
+
+- [ ] Add cloud sync / authentication
+- [ ] Add charts / analytics
+- [ ] Add push notifications
+- [ ] Export data as CSV
+
+---
+
+## 📄 License
+
+MIT License © 2025 [@HDemir23](https://github.com/HDemir23)
+
+---
+
+## 🙌 Acknowledgements
+
+Thanks to open-source tools and Expo ecosystem for making development smooth across platforms.
