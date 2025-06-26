@@ -1,5 +1,7 @@
 # 💰 ExpensesApp
 
+[Download For Android](https://expo.dev/accounts/roseprince/projects/Balance/builds/b7c2e4f7-3444-477f-bff2-ef9ca4a1a23f)
+
 **ExpensesApp** is a cross-platform React Native application built with Expo. It helps users track daily expenses with features like currency conversion, theme switching, and local storage.
 
 ## ✨ Features
@@ -25,7 +27,14 @@
 
 ## 📷 Screenshots
 
-- After EAS build :D
+### Light Theme
+[1](./assets/images/AppView/1.jpg)
+[2](./assets/images/AppView/2.jpg)
+[3](./assets/images/AppView/3.jpg)
+### Dark Theme
+[4](./assets/images/AppView/4.jpg)
+[5](./assets/images/AppView/5.jpg)
+[6](./assets/images/AppView/6.jpg)
 
 ## 🚀 Getting Started
 
