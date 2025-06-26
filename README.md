@@ -28,13 +28,16 @@
 ## 📷 Screenshots
 
 ### Light Theme
-[1](./assets/images/AppView/1.jpg)
-[2](./assets/images/AppView/2.jpg)
-[3](./assets/images/AppView/3.jpg)
+
+![1](./assets/images/AppView/1.jpg)
+![2](./assets/images/AppView/2.jpg)
+![3](./assets/images/AppView/3.jpg)
+
 ### Dark Theme
-[4](./assets/images/AppView/4.jpg)
-[5](./assets/images/AppView/5.jpg)
-[6](./assets/images/AppView/6.jpg)
+
+![4](./assets/images/AppView/4.jpg)
+![5](./assets/images/AppView/5.jpg)
+![6](./assets/images/AppView/6.jpg)
 
 ## 🚀 Getting Started
 
