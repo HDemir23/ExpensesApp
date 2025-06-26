@@ -23,21 +23,25 @@
 - [Expo Router](https://expo.github.io/router/)
 - [Expo Localization](https://docs.expo.dev/versions/latest/sdk/localization/)
 - [React Native Gesture Handler](https://docs.swmansion.com/react-native-gesture-handler/)
-- [React Native Picker](https://github.com/react-native-picker/picker) 
+- [React Native Picker](https://github.com/react-native-picker/picker)
 
 ## 📷 Screenshots
 
 ### Light Theme
 
-<img src="./assets/images/AppView/1.jpg" alt="Light 1" width="300" />
-<img src="./assets/images/AppView/2.jpg" alt="Light 2" width="300" />
-<img src="./assets/images/AppView/3.jpg" alt="Light 3" width="300" />
+<p align="center">
+  <img src="./assets/images/AppView/1.jpg" alt="Light 1" width="30%" />
+  <img src="./assets/images/AppView/2.jpg" alt="Light 2" width="30%" />
+  <img src="./assets/images/AppView/3.jpg" alt="Light 3" width="30%" />
+</p>
 
 ### Dark Theme
 
-<img src="./assets/images/AppView/4.jpg" alt="Dark 1" width="300" />
-<img src="./assets/images/AppView/5.jpg" alt="Dark 2" width="300" />
-<img src="./assets/images/AppView/6.jpg" alt="Dark 3" width="300" />
+<p align="center">
+  <img src="./assets/images/AppView/4.jpg" alt="Dark 1" width="30%" />
+  <img src="./assets/images/AppView/5.jpg" alt="Dark 2" width="30%" />
+  <img src="./assets/images/AppView/6.jpg" alt="Dark 3" width="30%" />
+</p>
 
 ## 🚀 Getting Started
 
