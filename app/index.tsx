@@ -1,3 +1,4 @@
+import ApiReq from "@/components/notifi";
 import { useTheme, useThemeColors } from "@/constants/themeProvider";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
@@ -40,6 +41,11 @@ export default function Index() {
       </TouchableOpacity>
 
       <View style={styles.content}>
+        <View style={{ flexDirection: "row" }}>
+          <ApiReq currency="USD" />
+          <ApiReq currency="TRY" />
+        </View>
+
         <View style={[styles.imageContainer, { borderColor: theme.border }]}>
           <Ionicons
             onPress={onPress}

@@ -73,7 +73,7 @@ export default function TotalBox() {
 
   const formattedAmount = new Intl.NumberFormat(locale, {
     style: "currency",
-    currency: showUSD ? "USD" : Localization.currency ?? "TRY",
+    currency: showUSD ? "USD" : "TRY",
     currencyDisplay: "narrowSymbol",
   }).format(amount);
 

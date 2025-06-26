@@ -114,7 +114,7 @@ export default function AddExpenses(props: AddExpensesProps) {
               <Picker.Item key={day} label={`Day ${day} `} value={day} />
             ))}
           </Picker>
-
+            <Text></Text>
           <Picker
             selectedValue={currency}
             onValueChange={(itemValue) => {
